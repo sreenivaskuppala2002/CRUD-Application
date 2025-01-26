@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+
+
+{% block navbaritems %}
+{% if user.is_authenticated %}
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'insert' %}">Add Customer</a>
+  </li>
+    <span class="navbar-text">logged in as {{user.username}} |</span>
+
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+    </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% if messages %}
+{% block notification %}
+{% for message in messages %}
+<div class="container mt-3">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+{{message}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
+{% endif %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+  {% if records %}
+  
+  <div class="container mt-4">
+    <h5 class="mb-3">Total Customers : {{count}} </h5>
+    <table class="table table-hover table-striped">
+      <tr><th>S.no</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Mobile</th><th>Address</th>
+       <th>View</th>
+      </tr>
+      {% for record in records %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{record.first_name}}</td>
+        <td>{{record.last_name}}</td>
+        <td>{{record.email}}</td>
+        <td>{{record.mobile}}</td>
+        <td>{{record.Address}}</td>
+        <td><a href="{% url 'view' record.id %}">view</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <div class="container col-md-8 text-center mt-5">
+  <h2>CRM APP..... Management at it's finest!</h2>
+  <br>
+  <h4>Track your records effeciently!</h4>
+  <hr>
+  <br>
+  <a class="btn btn-primary" href="{% url 'insert' %}" role="button">ADD RECORDS</a>
+</div>
+  {% endif %}
+{% endif %}
+{% endblock %}

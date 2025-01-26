@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+
+{% block navbaritems %}
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Login</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+<div class="container col-md-3 mt-3">
+    <h3 class="text-start">Signup</h3>
+    <br>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <button class="btn btn-primary " type="submit">Register</button>
+    </form>
+    <br>
+    <p>Already have an account <a href="{% url 'home' %}">login</a></p>
+</div>
+{% endblock %}
+

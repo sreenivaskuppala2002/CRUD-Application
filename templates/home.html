@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block navbaritems %}
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% if messages %}
+{% block notification %}
+{% for message in messages %}
+<div class="container mt-3">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+{{message}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
+{% endif %}
+
+{% block content %}
+<div class="container col-md-8 text-center mt-5">
+    <h2>CRM APP..... Management at it's finest!</h2>
+    <br>
+    <h4>Track your records effeciently!</h4>
+    <hr>
+    <br>
+    <p><a class="btn btn-primary" href="{% url 'register' %}" role="button">Create Account</a></p>
+    <p>Already have an account <a href="{% url 'login' %}">Login</a></p>
+</div>
+
+{% endblock %}

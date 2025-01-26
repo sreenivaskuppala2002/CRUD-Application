@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+
+{% block navbaritems %}
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% if messages %}
+{% block notification %}
+{% for message in messages %}
+<div class="container mt-3">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+{{message}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
+{% endif %}
+
+
+
+
+
+{% block content %}
+<div class="container col-md-4 mt-5 text-bg-light rounded-3">
+
+    <div class="col-md-10 offset-1 p-3 text-center">
+
+    <h4 class="text-start mb-3">Login</h4>
+
+    <form method="post" action="{% url 'login' %}">
+
+        {% csrf_token %}
+
+        <input class="form-control" type="text" placeholder="Username" name="username" >
+
+        <br>
+
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+
+        <br>
+
+        <button class="btn btn-primary " type="submit">Login</button>
+
+    </form>
+    <br>
+    <p>Don't have an account <a href="{% url 'register' %}">Register</a></p>
+    </div>
+</div>
+{% endblock %}
